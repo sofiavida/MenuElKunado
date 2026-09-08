@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Súper Taquería "El Kuñado" — Tacos Árabes</title>
+<meta name="description" content="Menú y pedidos por WhatsApp — Súper Taquería El Kuñado, Tacos Árabes de Puebla">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Fredoka:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --rojo: #b91c2b;
+    --rojo-osc: #8f1420;
+    --amarillo: #f6c319;
+    --amarillo-claro: #ffd83d;
+    --naranja: #e2861f;
+    --crema: #fff6d8;
+    --verde-whats: #25D366;
+    --verde-whats-osc: #1da851;
+    --tinta: #2a1608;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    font-family:'Fredoka', sans-serif;
+    color: var(--tinta);
+    background: var(--rojo);
+    background-image:
+      radial-gradient(circle at 15% 10%, rgba(255,255,255,0.05), transparent 40%);
+  }
+
+  .zigzag-frame{
+    max-width: 760px;
+    margin: 0 auto;
+    background: var(--rojo);
+    padding: 14px;
+  }
+
+  .inner{
+    position:relative;
+    background:
+      radial-gradient(ellipse at 20% 15%, rgba(255,255,255,0.35), transparent 45%),
+      radial-gradient(ellipse at 80% 30%, rgba(226,134,31,0.55), transparent 40%),
+      radial-gradient(ellipse at 30% 80%, rgba(226,134,31,0.45), transparent 45%),
+      radial-gradient(ellipse at 90% 90%, rgba(255,255,255,0.15), transparent 40%),
+      var(--amarillo-claro);
+    border: 6px solid var(--rojo);
+    border-radius: 6px;
+  }
+
+  /* zigzag top & bottom using clip-path bands */
+  .zig{
+    height: 26px;
+    background: var(--amarillo-claro);
+    position: relative;
+  }
+  .zig.top{
+    background:
+      linear-gradient(135deg, transparent 50%, var(--rojo) 50%) 0 0/24px 26px repeat-x,
+      linear-gradient(-135deg, transparent 50%, var(--rojo) 50%) 0 0/24px 26px repeat-x,
+      var(--amarillo-claro);
+  }
+  .zig.bottom{
+    background:
+      linear-gradient(45deg, transparent 50%, var(--rojo) 50%) 0 0/24px 26px repeat-x,
+      linear-gradient(-45deg, transparent 50%, var(--rojo) 50%) 0 0/24px 26px repeat-x,
+      var(--amarillo-claro);
+  }
+
+  header{
+    padding: 6px 20px 18px;
+    text-align:center;
+  }
+
+  .mascots-row{
+    display:flex;
+    align-items:flex-start;
+    justify-content:space-between;
+    gap: 6px;
+  }
+  .mascots-row img{
+    width: 96px;
+    height: auto;
+    filter: drop-shadow(0 3px 4px rgba(0,0,0,0.25));
+    flex-shrink: 0;
+  }
+  .mascots-row img.flip{
+    transform: scaleX(-1);
+  }
+
+  .logo-block{
+    flex: 1;
+    padding-top: 6px;
+  }
+
+  .logo-oval{
+    background: var(--amarillo-claro);
+    border: 4px solid var(--rojo);
+    border-radius: 50% / 60%;
+    padding: 10px 18px 14px;
+    box-shadow: 0 3px 0 rgba(0,0,0,0.08) inset;
+  }
+
+  .brand{
+    font-family:'Baloo 2', sans-serif;
+    font-weight: 800;
+    color: var(--rojo);
+    font-size: clamp(1.6rem, 6vw, 2.3rem);
+    line-height: 1.05;
+    margin: 0;
+    letter-spacing: 0.5px;
+  }
+  .brand small{
+    display:block;
+    font-size: 0.42em;
+    font-weight: 700;
+    letter-spacing: 2px;
+  }
+  .subbrand{
+    font-family:'Baloo 2', sans-serif;
+    font-weight: 700;
+    color: var(--tinta);
+    font-size: clamp(1.1rem, 4vw, 1.5rem);
+    margin: 2px 0 0;
+  }
+
+  .tagline{
+    color: var(--rojo-osc);
+    font-weight: 600;
+    font-style: italic;
+    font-size: 0.82rem;
+    margin: 10px 6px 0;
+  }
+
+  main{
+    padding: 4px 22px 8px;
+  }
+
+  .menu-section{
+    margin-top: 6px;
+  }
+
+  .menu-row{
+    display:flex;
+    align-items: baseline;
+    gap: 6px;
+    padding: 7px 0;
+    border-bottom: 2px dotted rgba(42,22,8,0.35);
+  }
+  .menu-row .name{
+    font-family:'Baloo 2', sans-serif;
+    font-weight: 700;
+    font-size: 1.05rem;
+    white-space: nowrap;
+  }
+  .menu-row .fill{
+    flex: 1;
+    border-bottom: 2px dotted rgba(42,22,8,0.35);
+    transform: translateY(-6px);
+  }
+  .menu-row .price{
+    font-family:'Baloo 2', sans-serif;
+    font-weight: 800;
+    font-size: 1.1rem;
+    color: var(--rojo);
+    white-space: nowrap;
+  }
+  .menu-row .price .var{
+    font-size:0.65em;
+    font-weight:600;
+    color: var(--tinta);
+    display:block;
+    text-align:right;
+    line-height:1.1;
+  }
+
+  .two-col{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 22px;
+  }
+
+  .queso-box{
+    margin-top: 18px;
+    background: rgba(255,255,255,0.35);
+    border: 3px solid var(--rojo);
+    border-radius: 14px;
+    padding: 10px 16px 14px;
+  }
+  .queso-box h3{
+    font-family:'Baloo 2', sans-serif;
+    color: var(--rojo);
+    text-align:center;
+    margin: 0 0 6px;
+    font-size: 1.1rem;
+  }
+
+  .whats-btn{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap: 10px;
+    background: var(--verde-whats);
+    color: white;
+    text-decoration:none;
+    font-family:'Baloo 2', sans-serif;
+    font-weight: 700;
+    font-size: 1.15rem;
+    padding: 14px 20px;
+    border-radius: 50px;
+    margin: 20px 8px 6px;
+    box-shadow: 0 4px 0 var(--verde-whats-osc), 0 6px 14px rgba(0,0,0,0.25);
+    transition: transform 0.12s ease;
+  }
+  .whats-btn:active{
+    transform: translateY(3px);
+    box-shadow: 0 1px 0 var(--verde-whats-osc), 0 3px 8px rgba(0,0,0,0.2);
+  }
+  .whats-btn svg{ width: 26px; height: 26px; flex-shrink:0; }
+
+  .phone-line{
+    text-align:center;
+    color: var(--rojo);
+    font-family:'Baloo 2', sans-serif;
+    font-weight: 800;
+    font-size: 1.3rem;
+    letter-spacing: 1px;
+    margin: 0 0 4px;
+  }
+  .phone-caption{
+    text-align:center;
+    color: var(--rojo-osc);
+    font-weight: 600;
+    font-size: 0.82rem;
+    margin: 0 0 10px;
+  }
+
+  .qr-section{
+    text-align:center;
+    margin: 26px 0 10px;
+    padding-top: 18px;
+    border-top: 3px dotted rgba(42,22,8,0.3);
+  }
+  .qr-section h3{
+    font-family:'Baloo 2', sans-serif;
+    color: var(--rojo);
+    margin: 0 0 4px;
+  }
+  .qr-section p{
+    font-size: 0.85rem;
+    margin: 0 0 12px;
+    color: var(--tinta);
+  }
+  #qrcode{
+    display:inline-block;
+    background:white;
+    padding: 10px;
+    border-radius: 12px;
+    border: 3px solid var(--rojo);
+  }
+
+  footer{
+    text-align:center;
+    padding: 14px 20px 4px;
+    color: var(--rojo-osc);
+    font-size: 0.75rem;
+  }
+
+  @media (max-width: 480px){
+    .two-col{ grid-template-columns: 1fr; }
+    .mascots-row img{ width: 68px; }
+    .menu-row .name{ font-size: 0.92rem; }
+    .menu-row .price{ font-size: 0.98rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="zigzag-frame">
+  <div class="inner">
+    <div class="zig top"></div>
+
+    <header>
+      <div class="mascots-row">
+        <img src="images/taquito.png" alt="Taquito Árabe El Kuñado">
+        <div class="logo-block">
+          <div class="logo-oval">
+            <p class="brand">SÚPER TAQUERÍA<br><small>"EL KUÑADO"</small></p>
+            <p class="subbrand">Tacos Árabes</p>
+          </div>
+        </div>
+        <img class="flip" src="images/taquito.png" alt="Taquito Árabe El Kuñado">
+      </div>
+      <p class="tagline">¡Los mejores Tacos Árabes de Puebla… de San Baltazar… del Mundo!</p>
+    </header>
+
+    <main>
+      <section class="menu-section two-col">
+        <div>
+          <div class="menu-row"><span class="name">Taco Árabe</span><span class="fill"></span><span class="price">$35</span></div>
+          <div class="menu-row"><span class="name">Taco Oriental</span><span class="fill"></span><span class="price">$20</span></div>
+          <div class="menu-row"><span class="name">Cemita</span><span class="fill"></span><span class="price">$50</span></div>
+          <div class="menu-row"><span class="name">Torta</span><span class="fill"></span><span class="price">$40</span></div>
+          <div class="menu-row"><span class="name">Quesadilla</span><span class="fill"></span><span class="price">$35</span></div>
+          <div class="menu-row"><span class="name">Gringa</span><span class="fill"></span><span class="price">$75</span></div>
+          <div class="menu-row"><span class="name">Orden de cebollas</span><span class="fill"></span><span class="price">$40</span></div>
+          <div class="menu-row"><span class="name">Flan</span><span class="fill"></span><span class="price">$20</span></div>
+          <div class="menu-row"><span class="name">Ensalada</span><span class="fill"></span><span class="price">$40</span></div>
+        </div>
+        <div>
+          <div class="menu-row"><span class="name">Refresco vidrio</span><span class="fill"></span><span class="price">$28</span></div>
+          <div class="menu-row"><span class="name">Refresco pet</span><span class="fill"></span><span class="price">$35</span></div>
+          <div class="menu-row"><span class="name">1/4 Kg</span><span class="fill"></span><span class="price">$85</span></div>
+          <div class="menu-row"><span class="name">1/2 Kg</span><span class="fill"></span><span class="price">$160</span></div>
+          <div class="menu-row"><span class="name">3/4 Kg</span><span class="fill"></span><span class="price">$240</span></div>
+          <div class="menu-row"><span class="name">1 Kg</span><span class="fill"></span><span class="price">$320</span></div>
+          <div class="menu-row"><span class="name">1 1/2 Kg</span><span class="fill"></span><span class="price">$480</span></div>
+        </div>
+      </section>
+
+      <div class="queso-box">
+        <h3>Con queso</h3>
+        <div class="two-col">
+          <div>
+            <div class="menu-row"><span class="name">Taco Árabe</span><span class="fill"></span><span class="price">$50</span></div>
+            <div class="menu-row"><span class="name">Taco Oriental</span><span class="fill"></span><span class="price">$30</span></div>
+          </div>
+          <div>
+            <div class="menu-row"><span class="name">Cemita</span><span class="fill"></span><span class="price">$60</span></div>
+            <div class="menu-row"><span class="name">Torta</span><span class="fill"></span><span class="price">$50</span></div>
+          </div>
+        </div>
+      </div>
+
+      <a class="whats-btn" id="whatsBtn" href="#" target="_blank" rel="noopener">
+        <svg viewBox="0 0 32 32" fill="white" xmlns="http://www.w3.org/2000/svg"><path d="M16.001 2.667c-7.363 0-13.334 5.97-13.334 13.333 0 2.353.615 4.66 1.782 6.686L2.7 29.333l6.83-1.79a13.27 13.27 0 0 0 6.47 1.648h.006c7.362 0 13.333-5.97 13.333-13.334 0-3.562-1.387-6.912-3.906-9.43a13.246 13.246 0 0 0-9.432-3.76zm0 24.4h-.005a11.06 11.06 0 0 1-5.634-1.542l-.404-.24-4.053 1.062 1.082-3.951-.263-.406a11.02 11.02 0 0 1-1.69-5.9c0-6.11 4.972-11.083 11.086-11.083 2.96 0 5.744 1.155 7.837 3.25a11.02 11.02 0 0 1 3.244 7.842c0 6.11-4.972 11.083-11.2 10.968zm6.078-8.294c-.333-.167-1.97-.972-2.275-1.083-.305-.111-.527-.166-.75.167-.222.333-.86 1.083-1.055 1.305-.194.222-.388.25-.72.083-.334-.167-1.409-.52-2.684-1.658-.992-.885-1.663-1.978-1.858-2.31-.194-.334-.02-.514.146-.68.15-.15.334-.389.5-.583.167-.195.223-.334.334-.556.111-.223.055-.417-.028-.583-.083-.167-.75-1.807-1.028-2.474-.271-.65-.546-.563-.75-.573-.194-.01-.417-.012-.64-.012-.222 0-.583.083-.889.417-.305.333-1.166 1.14-1.166 2.778 0 1.639 1.194 3.222 1.361 3.444.166.222 2.352 3.593 5.699 5.037.796.344 1.417.55 1.901.703.799.254 1.526.218 2.101.132.641-.096 1.97-.805 2.248-1.583.278-.778.278-1.445.194-1.584-.083-.14-.305-.222-.638-.389z"/></svg>
+        <span id="whatsLabel">Pedir por WhatsApp</span>
+      </a>
+      <p class="phone-line">+52 222 677 26 38</p>
+      <p class="phone-caption">Toca el botón para pedir directo por WhatsApp</p>
+
+      <div class="qr-section">
+        <h3>Escanea y comparte el menú</h3>
+        <p>Este código QR abre esta misma página del menú</p>
+        <div id="qrcode"></div>
+      </div>
+    </main>
+
+    <div class="zig bottom"></div>
+  </div>
+</div>
+
+<footer>Súper Taquería "El Kuñado" · Tacos Árabes de Puebla</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script>
+  // WhatsApp order link with prefilled message
+  var phone = "522226772638"; // +52 222 677 26 38
+  var msg = encodeURIComponent("Hola, quiero hacer un pedido en Súper Taquería El Kuñado 🌯");
+  document.getElementById('whatsBtn').href = "https://wa.me/" + phone + "?text=" + msg;
+
+  // QR code pointing to this same page, wherever it's hosted
+  var pageUrl = window.location.href.split('#')[0];
+  new QRCode(document.getElementById("qrcode"), {
+    text: pageUrl,
+    width: 160,
+    height: 160,
+    colorDark: "#2a1608",
+    colorLight: "#ffffff",
+    correctLevel: QRCode.CorrectLevel.M
+  });
+</script>
+
+</body>
+</html>
